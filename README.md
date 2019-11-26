@@ -8,9 +8,9 @@ Start-UDDashboard -Port 10005 -Dashboard (
   New-UDDashboard -Title "Powershell UniversalDashboard" -Content {
     New-UDLayout -Columns 6 -Content {
       New-UDHeading -Size 4 -Text "Running Services"
-      $total = (get-service).count
-      $running = (get-service | ? { $_.Status -eq 'Running' }).count
-      New-UDIndicator -Value $running -MaxValue $total -Width 200
+      $services = get-service
+      $running = ($services | ? { $_.Status -eq 'Running' })
+      New-UDIndicator -Value $running.count -MaxValue $services.count -Width 200
     }
 
   }
